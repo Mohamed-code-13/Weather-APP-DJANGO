@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% for city in weather_data %}
+
+        <div class="mx-auto mt-5" style="width: 380px;">
+
+            <div class="card" style="width: 18rem;">
+                <div style="max-width: 100%; height: auto;">
+                    <img src="http://openweathermap.org/img/w/{{ city.icon }}.png" alt="Image" >
+                </div>
+                <div class="card-body text-primary">
+                  <div class="card-header">{{ city.city }}</div>
+                    <h5 class="card-title">{{ city.temperature }}°C</h5>
+
+                    <p class="card-text">{{ city.description }}</p>
+
+                  <div class="float-right">
+                      <form action="delete_city/{{ city.id }}" method="post">
+                          {% csrf_token %}
+
+                          <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                      </form>
+                  </div>
+                </div>
+            </div>
+
+        </div>
+
+    {% endfor %}
+
+{% endblock content%}
