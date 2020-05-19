@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Weather APP</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+              integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+        <link rel="stylesheet" href="{% static '/style2.css' %}">
+    </head>
+    <body>
+        <nav class="navbar navbar-dark bg-primary">
+        <!-- Navbar content -->
+            <a class="navbar-brand ml-5" href="#">Weather APP</a>
+        </nav>
+        <div class="container">
+
+            <div class="mx-auto mt-5">
+                <form class="form-inline my-2 my-lg-0" method="POST">
+                    {% csrf_token %}
+
+                    {{ form.name }}
+                    <button class="add btn btn-outline-success my-2 my-sm-0" type="submit">Add City</button>
+
+                    {% if msg %}
+                         <div class="card text-white {{ class_msg }} mb-3 mt-5">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ msg }}</h5>
+                            </div>
+                        </div>
+                    {% endif %}
+                </form>
+            </div>
+        </div>
+
+        <div class="container">
+            {% block content %}
+            {% endblock content %}
+        </div>
+    </body>
+</html>
